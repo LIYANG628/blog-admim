@@ -8,7 +8,7 @@ type Props = {
 const AuthLayout: FC<PropsWithChildren> = ({ children }: Props) => {
     return (
         <div className={styles.container}>
-            <div className={styles.box}>{children}</div>
+            <div className={styles.boxTest}>{children}</div>
         </div>
     )
 }

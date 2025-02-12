@@ -12,4 +12,9 @@ export default defineConfig({
       "@": root,
     } as AliasOptions,
   },
+  css:{
+    modules:{
+      localsConvention:'camelCaseOnly'
+    }
+  }
 })
