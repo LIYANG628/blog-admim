@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig, AxiosRequestTransformer } from 'axios'
+import axios from 'axios'
 import config from '@/config.json';
 import qs from 'qs';
 import { message } from 'antd';
@@ -14,7 +14,7 @@ const axiosInstance = axios.create({
 
 // request interceptor
 axiosInstance.interceptors.request.use(config => {
-    console.log(config.url?.toUpperCase())
+    const URL = config.url?.toUpperCase();
     config.transformRequest = (data) => {
         if (data instanceof FormData) {
             return qs.stringify(Object.entries(data));

@@ -50,7 +50,7 @@ const Register: FC = ({ }: Props) => {
                 label="Username"
                 name="username"
                 rules={[{ required: true, message: 'Please input your username!' },
-                { pattern: /^[a-zA-X0-8]{1,6}$/, message: "please provide valid name" }
+                { pattern: /^[a-zA-X0-8]{1,10}$/, message: "please provide valid name" }
                 ]}
             >
                 <Input />

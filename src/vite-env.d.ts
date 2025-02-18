@@ -8,3 +8,14 @@ type RegForm = {
     password: string,
     repassword: stirng
 }
+
+type LoginForm = Omit<RegForm, 'repassword'>;
+
+interface BaseResponse {
+    code: number,
+    message: string
+}
+
+interface LoginResponse extends BaseResponse {
+    token:string
+}
