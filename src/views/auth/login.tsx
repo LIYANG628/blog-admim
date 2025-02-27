@@ -78,5 +78,6 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 
   message.success(res?.message);
   setToken(res.token);
-  return redirect('/');
+  // return redirect('/');
+  return null;
 }

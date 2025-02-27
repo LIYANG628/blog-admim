@@ -1,9 +1,11 @@
+import resetters from "@/store/resetter";
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
 
 const initStore = {
-    token: ''
+    token: '',
+    collapsed: false,
 }
 
 type StoreType = typeof initStore;
@@ -11,7 +13,9 @@ type StoreType = typeof initStore;
 const useAppStore = create<StoreType>()(
     immer(
         devtools(
-            persist(() => {
+            // inject resetter
+            persist((set) => {
+                resetters.push(() => set(initStore))
                 return {
                     ...initStore
                 };
@@ -25,5 +29,14 @@ export const setToken = (token: string) => {
         state.token = token;
     })
 }
+
+export const switchCollapsed = () => {
+    useAppStore.setState(state => {
+        state.collapsed = !state.collapsed
+    })
+}
+
+export const selectCollapsed = (state: StoreType) => state.collapsed;
+export const selectToken = (state: StoreType) => state.token;
 
 export default useAppStore;

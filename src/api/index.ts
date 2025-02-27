@@ -2,6 +2,8 @@ import axios from 'axios'
 import config from '@/config.json';
 import qs from 'qs';
 import { message } from 'antd';
+import useAppStore from '@/store';
+import { resetAllStore } from '@/store/resetter';
 
 const axiosInstance = axios.create({
     baseURL: config.baseURL,
@@ -22,7 +24,14 @@ axiosInstance.interceptors.request.use(config => {
             return qs.stringify(data)
         }
     }
+
+    // set token
+    const token = useAppStore.getState().token;
+    if (URL?.includes('/MY') && token) {
+        config.headers.Authorization = token;
+    }
     return config;
+
 }, (err) => {
     return Promise.reject(err)
 })
@@ -40,6 +49,13 @@ axiosInstance.interceptors.response.use(function (response) {
     let errorMsg = '';
     if (error.response && error.response.data) {
         errorMsg = error.response.data.message;
+        if (error.response.status == 401) {
+            errorMsg = "Invalid Credential, please re-login"
+            if (useAppStore.getState().token) {
+                message.error(errorMsg);
+                resetAllStore();
+            }
+        }
     } else {
         if (error.code == "ERR_NETWORK") {
             errorMsg = 'Network connection error'
@@ -47,9 +63,11 @@ axiosInstance.interceptors.response.use(function (response) {
             errorMsg = 'Timeout error'
         } else {
             errorMsg = "Ooops, please try again"
+            message.error(errorMsg);
         }
     }
-    message.error(errorMsg);
+
+
     return Promise.reject(error);
 })
 

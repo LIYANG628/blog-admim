@@ -11,11 +11,28 @@ type RegForm = {
 
 type LoginForm = Omit<RegForm, 'repassword'>;
 
-interface BaseResponse {
+interface BaseResponse<T = unknown> {
     code: number,
-    message: string
+    message: string,
+    data?: T
 }
 
 interface LoginResponse extends BaseResponse {
-    token:string
+    token: string
+}
+
+type User = {
+    readonly id: number,
+    username: string,
+    nickname?: string,
+    email?: string,
+    user_pic?: string
+}
+
+type MenuItem = {
+    readonly key: string,
+    title?: string,
+    label: string,
+    icon: ReactNode,
+    children?: MenuItem[]
 }
