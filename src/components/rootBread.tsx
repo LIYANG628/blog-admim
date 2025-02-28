@@ -14,7 +14,7 @@ export default function RootBreadcrumb({ }: Props) {
     const currentPath = currPathName == '/' ? '/home' : currPathName;
 
     const items = useMemo(() => {
-        return resolveBreadcrumb(data?.menus, currentPath)
+        return resolveBreadcrumb(data, currentPath)
     }, [data, currPathName]);
     return (
         <Breadcrumb

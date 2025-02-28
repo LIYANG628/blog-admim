@@ -29,6 +29,8 @@ type User = {
     user_pic?: string
 }
 
+type UserInfoForm = Pick<User>['id' | 'nickname' | 'email'];
+
 type MenuItem = {
     readonly key: string,
     title?: string,

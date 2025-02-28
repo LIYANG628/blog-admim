@@ -11,7 +11,7 @@ import ArticleCategory from "@/views/article/article-category";
 import ArticleList from "@/views/article/article-list";
 import EditArticle from "@/views/article/edit-article";
 import UserPassword from "@/views/user/user-pwd";
-import UserInfo from "@/views/user/user-info";
+import UserInfo, { editUserAction } from "@/views/user/user-info";
 import UserAvatar from "@/views/user/user-avatar";
 
 const router = createBrowserRouter([
@@ -26,7 +26,7 @@ const router = createBrowserRouter([
             { path: 'art-list', element: <ArticleCategory /> },
             { path: 'art-add', element: <ArticleList /> },
             { path: 'art-edit/:id', element: <EditArticle /> },
-            { path: 'user-info', element: <UserInfo /> },
+            { path: 'user-info', element: <UserInfo />, action:editUserAction},
             { path: '/user-avatar', element: <UserAvatar /> },
             { path: 'user-pwd', element: <UserPassword /> },
         ]

@@ -5,7 +5,13 @@ import { immer } from "zustand/middleware/immer";
 import { getUserInfo } from "@/api/user-api";
 
 const initState = {
-    user: {} as User
+    user: {
+        id: 0,
+        username: '',
+        nickname: '',
+        email: '',
+        user_pic: ''
+    } as User
 }
 
 type UserStoreType = typeof initState;
@@ -27,12 +33,13 @@ const useUserStore = create<UserStoreType>()(
 export const initUser = () => {
     getUserInfo().then(res => {
         if (res.data) {
-            useUserStore.setState(res.data)
+            useUserStore.setState({ user: res.data as User })
         }
     })
 }
 
 export const selectName = (state: UserStoreType) => state.user.nickname || state.user.username;
 export const selectAvatar = (state: UserStoreType) => state.user.user_pic;
+export const selectUserInfo = (state: UserStoreType) => state.user;
 
 export default useUserStore;
