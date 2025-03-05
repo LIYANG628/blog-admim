@@ -1,10 +1,7 @@
-import React from 'react'
-import type { FormProps } from 'antd';
-import { Button, Checkbox, Form, Input, message } from 'antd';
+import { Button, Form, Input, message } from 'antd';
 import useUserStore, { selectUserInfo } from '@/store/user-store';
 import { useForm } from 'antd/es/form/Form';
-import { ActionFunctionArgs, useNavigation, useSubmit } from 'react-router';
-import { ActionFunction } from 'react-router-dom';
+import { ActionFunctionArgs, useActionData, useNavigation, useSubmit } from 'react-router';
 import { updateUserInfo } from '@/api/user-api';
 
 type Props = {}
@@ -17,7 +14,7 @@ export default function UserInfo({ }: Props) {
   const navigation = useNavigation();
 
   const onFinish = (values: UserInfoForm) => {
-    submit(values, { method: 'PUT', })
+    submit(values, { method: 'PATCH', })
   };
 
   const onFinishFailed = (errorInfo: unknown) => {
@@ -73,7 +70,7 @@ export default function UserInfo({ }: Props) {
 export const editUserAction = async ({ request }: ActionFunctionArgs) => {
   const fd = await request.formData();
   const res = await updateUserInfo(Object.fromEntries(fd));
-  if (res.code == 1) return;
+  if (res.code == 1) return null;
   message.success("Update done")
   return null;
 }

@@ -44,6 +44,7 @@ axiosInstance.interceptors.response.use(function (response) {
         return response.data;
     }
 }, function (error) {
+    console.log(error)
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error
     let errorMsg = '';
@@ -55,6 +56,9 @@ axiosInstance.interceptors.response.use(function (response) {
                 message.error(errorMsg);
                 resetAllStore();
             }
+        }
+        if (error.response.status == 500) {
+            message.error(errorMsg);
         }
     } else {
         if (error.code == "ERR_NETWORK") {

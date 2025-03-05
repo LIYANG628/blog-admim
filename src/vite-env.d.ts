@@ -38,3 +38,9 @@ type MenuItem = {
     icon: ReactNode,
     children?: MenuItem[]
 }
+
+type PasswordForm = {
+    new_pwd: string,
+    old_pwd: string,
+    re_pwd: string
+}

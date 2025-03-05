@@ -10,7 +10,7 @@ import AddArticle from "@/views/article/add-article";
 import ArticleCategory from "@/views/article/article-category";
 import ArticleList from "@/views/article/article-list";
 import EditArticle from "@/views/article/edit-article";
-import UserPassword from "@/views/user/user-pwd";
+import UserPassword, { updatePwdAction } from "@/views/user/user-pwd";
 import UserInfo, { editUserAction } from "@/views/user/user-info";
 import UserAvatar from "@/views/user/user-avatar";
 
@@ -28,7 +28,7 @@ const router = createBrowserRouter([
             { path: 'art-edit/:id', element: <EditArticle /> },
             { path: 'user-info', element: <UserInfo />, action:editUserAction},
             { path: '/user-avatar', element: <UserAvatar /> },
-            { path: 'user-pwd', element: <UserPassword /> },
+            { path: 'user-pwd', element: <UserPassword />,action:updatePwdAction },
         ]
     },
     {
